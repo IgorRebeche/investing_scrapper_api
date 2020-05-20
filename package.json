@@ -1,0 +1,12 @@
+{
+  "name": "investing_scrapper_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "igor rebeche rosa",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "ws": "^7.3.0"
+  }
+}

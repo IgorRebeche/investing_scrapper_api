@@ -10,14 +10,15 @@
   "dependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/puppeteer": "^2.0.1",
+    "axios": "^0.19.2",
     "date-fns": "^2.13.0",
     "dotenv": "^8.2.0",
     "puppeteer": "^3.0.4",
     "puppeteer-extra": "^3.1.9",
     "puppeteer-extra-plugin-stealth": "^2.4.9",
+    "qs": "^6.9.4",
     "tslint": "5.12.1",
-    "typescript": "^3.8.3",
-    "ws": "^7.3.0"
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "prettier": "2.0.5"

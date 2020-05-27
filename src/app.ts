@@ -1,6 +1,5 @@
+require('dotenv').config()
 
-function main() {
-    console.log(`hello`)
-}
+async function main() {}
 
 main()

@@ -2,34 +2,44 @@ import qs from 'querystring'
 import { ivApi } from './api'
 import SearchAsset from '../entities/asset/searchAsset/index'
 
-class investingServices {
+type AlertTrigger = 'change_percent' | 'volume' | 'price'
+
+type Threshold = 'over' | 'under' | 'both'
+
+type Frequency = 'Once' | 'Recurring'
+
+export class InvestingServices {
   constructor() {}
 
   async createAlert(
     assetTicker: string,
-    frequency: string,
+    threshold: Threshold,
+    frequency: Frequency,
     value: number,
-    alert_trigger: string
+    alert_trigger: AlertTrigger
   ) {
-    //Get pair_ID
-    const searchAssetInfo = new SearchAsset(
-      await this.getPairInfoByAssetName(assetTicker)
-    )
+    const searchAssetInfo = await this.getPairInfoByAssetName(assetTicker)
 
     const data = qs.stringify({
       alertType: 'instrument',
-      'alertParams[alert_trigger]': 'price',
+      'alertParams[alert_trigger]': alert_trigger,
       'alertParams[pair_ID]': searchAssetInfo.pair_ID,
-      'alertParams[threshold]': 'over',
-      'alertParams[frequency]': 'Once',
-      'alertParams[value]': '68,64',
+      'alertParams[threshold]': threshold,
+      'alertParams[frequency]': frequency,
+      'alertParams[value]': value,
       'alertParams[platform]': 'desktopAlertsCenter',
       'alertParams[email_alert]': 'Yes',
     })
 
-    ivApi.post('/useralerts/service/create', data)
+    try {
+      const res = await ivApi.post('/useralerts/service/create', data)
 
-    //Create Alert
+      if (typeof res.data === 'number' && res.status == 200) {
+        console.log('Alert Created!')
+      }
+    } catch (error) {
+      console.log('Ocorreu algum erro ao criar o alerta', error)
+    }
   }
 
   async getPairInfoByAssetName(assetTicker: string) {
@@ -48,7 +58,7 @@ class investingServices {
     try {
       const res = await ivApi.post('/search/service/search', data, options)
 
-      return res.data.All[0]
+      return new SearchAsset(res.data.All[0])
     } catch (error) {
       console.log('Error getting Asset Id', error)
     }

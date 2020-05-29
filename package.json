@@ -5,14 +5,18 @@
   "author": "igor rebeche rosa",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node dist/app.js"
+    "start": "tsc && node dist/app.js",
+    "server": "tsc && node dist/server.js"
   },
   "dependencies": {
     "@types/date-fns": "^2.6.0",
+    "@types/express": "^4.17.6",
     "@types/puppeteer": "^2.0.1",
     "axios": "^0.19.2",
     "date-fns": "^2.13.0",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "ngrok": "^3.2.7",
     "puppeteer": "^3.0.4",
     "puppeteer-extra": "^3.1.9",
     "puppeteer-extra-plugin-stealth": "^2.4.9",

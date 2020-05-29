@@ -36,9 +36,11 @@ export class InvestingServices {
 
       if (typeof res.data === 'number' && res.status == 200) {
         console.log('Alert Created!')
+      } else {
+        console.log(res.data)
       }
     } catch (error) {
-      console.log('Ocorreu algum erro ao criar o alerta', error)
+      console.log('Error when creating alert', error)
     }
   }
 
